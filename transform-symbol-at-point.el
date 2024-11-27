@@ -59,19 +59,19 @@
 (require 'transient)
 
 (defgroup transform-symbol-at-point nil
-  "Transforming the symbol at point customizations"
+  "Transforming the symbol at point customizations."
   :group 'convenience
   :prefix "transform-symbol-at-point-")
 
 (defcustom transform-symbol-at-point-cursor-after-transform 'symbol-end
-  "Determines where the cursor should be after a successful transformation"
+  "Determines where the cursor should be after a successful transformation."
   :type '(choice
           (const :tag "Symbol End" symbol-end)
           (const :tag "Symbol Start" symbol-start)
           (const :tag "Next Symbol" next-symbol)))
 
 (defun transform-symbol-at-point--internal (fn)
-  "Transform the symbol at point with `fn'."
+  "Transform the symbol at point with `FN'."
   (let ((symbol (thing-at-point 'symbol t))
         (bounds (bounds-of-thing-at-point 'symbol)))
     (delete-region (car bounds) (cdr bounds))
@@ -84,41 +84,49 @@
 
 ;;;###autoload
 (defun transform-symbol-at-point-lower-camel-case ()
+  "Transform symbol at point into lower camel case format."
   (interactive)
   (transform-symbol-at-point--internal #'s-lower-camel-case))
 
 ;;;###autoload
 (defun transform-symbol-at-point-upper-camel-case ()
+  "Transform symbol at point into upper camel case format."
   (interactive)
   (transform-symbol-at-point--internal #'s-upper-camel-case))
 
 ;;;###autoload
 (defun transform-symbol-at-point-snake-case ()
+  "Transform symbol at point into snake case format."
   (interactive)
   (transform-symbol-at-point--internal #'s-snake-case))
 
 ;;;###autoload
 (defun transform-symbol-at-point-dashed-words ()
+  "Transform symbol at point into dashed words format."
   (interactive)
   (transform-symbol-at-point--internal #'s-dashed-words))
 
 ;;;###autoload
 (defun transform-symbol-at-point-downcase ()
+  "Transform symbol at point into downcase format."
   (interactive)
   (transform-symbol-at-point--internal #'s-downcase))
 
 ;;;###autoload
 (defun transform-symbol-at-point-capitalized-words ()
+  "Transform symbol at point into capitalized words format."
   (interactive)
   (transform-symbol-at-point--internal #'s-capitalized-words))
 
 ;;;###autoload
 (defun transform-symbol-at-point-titleized-words ()
+  "Transform symbol at point into titleized words format."
   (interactive)
   (transform-symbol-at-point--internal #'s-titleized-words))
 
 ;;;###autoload
 (defun transform-symbol-at-point-upcase ()
+  "Transform symbol at point into upcase format."
   (interactive)
   (transform-symbol-at-point--internal #'s-upcase))
 
@@ -138,7 +146,7 @@
 (fset 'transform-symbol-at-point-map transform-symbol-at-point-map)
 
 (transient-define-prefix transform-symbol-at-point ()
-  "Transient menu for transforming symbol at point"
+  "Transient menu for transforming symbol at point."
   [
    "Transform String At Point"
    ("c" "lower camelcase" transform-symbol-at-point-lower-camel-case)
