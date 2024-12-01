@@ -6,32 +6,36 @@
 ;; URL: https://github.com/waymondo/transform-symbol-at-point
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "24") (s "1.12.0") (transient "0.3.7"))
-;; License: GNU General Public License version 3, or (at your option) any later version
+;; License: GNU General Public License version 3, or (at your option) any later
+;; version
 ;; Keywords: convenience, tools
 
-;; This program is free software; you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or
-;; (at your option) any later version.
+;; This program is free software; you can redistribute it and/or modify it under
+;; the terms of the GNU General Public License as published by the Free Software
+;; Foundation, either version 3 of the License, or (at your option) any later
+;; version.
 
-;; This program is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
+;; This program is distributed in the hope that it will be useful, but WITHOUT
+;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;; FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;; details.
 
-;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+;; You should have received a copy of the GNU General Public License along with
+;; this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
-;; Easily change the symbol at point between camelcasing, snakecasing, dasherized and more.
+;; Easily change the symbol at point between camelcasing, snakecasing,
+;; dasherized and more.
 
-;; Bind `transform-symbol-at-point' to the keybinding of your preference, for example:
+;; Bind `transform-symbol-at-point' to the keybinding of your preference, for
+;; example:
 
 ;; (global-set-key (kbd "s-;") 'transform-symbol-at-point)
 
-;; If you would prefer to use `which-key' instead of the default `transient' support, make sure
-;; `which-key' is installed and bind `transform-symbol-at-point-map' instead:
+;; If you would prefer to use `which-key' instead of the default `transient'
+;; support, make sure `which-key' is installed and bind
+;; `transform-symbol-at-point-map' instead:
 
 ;; (global-set-key (kbd "s-;") 'transform-symbol-at-point-map)
 
@@ -57,6 +61,7 @@
 
 (require 's)
 (require 'transient)
+(eval-when-compile (require 'thingatpt))
 
 (defgroup transform-symbol-at-point nil
   "Transforming the symbol at point customizations."
@@ -158,6 +163,8 @@
    ("t" "titleize" transform-symbol-at-point-titleized-words)
    ("U" "upcase" transform-symbol-at-point-upcase)])
 
+(unless (locate-library "which-key")
+  (declare-function which-key-add-keymap-based-replacements "which-key"))
 
 (when (require 'which-key nil t)
   (which-key-add-keymap-based-replacements transform-symbol-at-point-map
