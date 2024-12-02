@@ -61,7 +61,7 @@
 
 (require 's)
 (require 'transient)
-(eval-when-compile (require 'thingatpt))
+(require 'thingatpt)
 
 (defgroup transform-symbol-at-point nil
   "Transforming the symbol at point customizations."
